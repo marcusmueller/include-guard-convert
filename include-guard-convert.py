@@ -27,15 +27,15 @@ cpp_commands = {
 }
 
 class guarded_include(object):
-    """
-    Class representing an #include'able file (a.k.a. a header).
-    """
+	"""
+	Class representing an #include'able file (a.k.a. a header).
+	"""
 
 	def __init__(self, filename, autoconvert = False):
 		self.filename = filename
 		assert(self._test_readable())
-        if autoconvert and self.test_oldstyle_guarded():
-            self.convert()
+		if autoconvert and self.test_oldstyle_guarded():
+			self.convert()
 
 	def _test_readable(self):
 		return os.access(self.filename, os.R_OK)
