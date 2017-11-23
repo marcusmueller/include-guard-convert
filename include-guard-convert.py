@@ -13,8 +13,8 @@ import subprocess
 import shlex 
 
 regexes = {
-		'ifndef' : '^\s*#(?:ifndef|IFNDEF)\s+([A-Z_0-9]{4,})\s*$',
-		'define' : '^\s*#(?:define|DEFINE)\s+([A-Z_0-9]{4,})\s*$',
+		'ifndef' : '^\s*#(?:ifndef|IFNDEF)\s+([A-Za-z_0-9]{4,})\s*$',
+		'define' : '^\s*#(?:define|DEFINE)\s+([A-Za-z_0-9]{4,})\s*$',
 		'endif' : '^\s*#(?:endif|ENDIF)\s*(/\*.*\*/|//.+)?\s*$',
 		'blank' : '^\s*(/\*.*\*/|//.+)?\s*$',
 		'pragma' : '^\s*#(?:pragma|PRAGMA)\s+(?:once|ONCE)'
@@ -22,20 +22,20 @@ regexes = {
 patterns = dict( [ (key, re.compile(regexes[key]) ) for key in regexes.keys() ] )
 
 cpp_commands = {
-		'strip_comments' : 'cpp -dD  -fpreprocessed  -P -x c++ {file}',
-		'test_if_guarded' : 'cpp -P -x c++ -D{define} {file}'
+		'strip_comments' : 'cpp -w -dD  -fpreprocessed  -P -x c++ {file}',
+		'test_if_guarded' : 'cpp -w -P -x c++ -D{define} {file}'
 }
 
 class guarded_include(object):
-    """
-    Class representing an #include'able file (a.k.a. a header).
-    """
+	"""
+	Class representing an #include'able file (a.k.a. a header).
+	"""
 
 	def __init__(self, filename, autoconvert = False):
 		self.filename = filename
 		assert(self._test_readable())
-        if autoconvert and self.test_oldstyle_guarded():
-            self.convert()
+		if autoconvert and self.test_oldstyle_guarded():
+			self.convert()
 
 	def _test_readable(self):
 		return os.access(self.filename, os.R_OK)
@@ -128,5 +128,5 @@ if __name__ == '__main__':
 			if gi.test_oldstyle_guarded():
 				gi.convert()
 		except SyntaxError as e:
-			print filen
-			print e
+			print (filen)
+			print (e)
