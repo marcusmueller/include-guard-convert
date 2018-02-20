@@ -80,6 +80,7 @@ class guarded_include(object):
 	def convert(self):
 		freadh = open(self.filename, 'r')
 		lines = freadh.readlines()
+		sep = '\r\n' if lines[0].endswith('\r\n') else '\n'
 		freadh.close()
 		fwriteh = open(self.filename , 'w')
 		for l_number in range(1,len(lines)):
@@ -107,7 +108,7 @@ class guarded_include(object):
 				if define is None:
 					define = newdefine
 				elif define == newdefine:
-					fwriteh.write('#pragma once\n')
+					fwriteh.write('#pragma once' + sep)
 					done = True
 			else:
 				fwriteh.write(line)
