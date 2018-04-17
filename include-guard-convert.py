@@ -13,9 +13,9 @@ import subprocess
 import shlex 
 
 regexes = {
-		'ifndef' : '^\s*#(?:ifndef|IFNDEF)\s+([A-Za-z_0-9]{4,})\s*$',
-		'define' : '^\s*#(?:define|DEFINE)\s+([A-Za-z_0-9]{4,})\s*$',
-		'endif' : '^\s*#(?:endif|ENDIF)\s*(/\*.*\*/|//.*)?\s*$',
+		'ifndef' : '^\s*# *(?:ifndef|IFNDEF)\s+([A-Za-z_0-9]{4,})\s*$',
+		'define' : '^\s*# *(?:define|DEFINE)\s+([A-Za-z_0-9]{4,})\s*$',
+		'endif' : '^\s*# *(?:endif|ENDIF)\s*(/\*.*\*/|//.*)?\s*$',
 		'blank' : '^\s*(/\*.*\*/|//.*)?\s*$',
 		'pragma' : '^\s*#(?:pragma|PRAGMA)\s+(?:once|ONCE)'
 }
