@@ -36,7 +36,7 @@ class declare_and_define_whatever_you_want
 ## Dependencies
 
 * C preprocessor (only tested with the GCC cpp)
-* python 2.3+ (I think. Tested with 2.7.5)
+* Python 3 (tested with 3.8.2)
 
 ## Caveats
 

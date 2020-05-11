@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Tool to convert traditional include guards to #pragma once.
@@ -47,7 +47,8 @@ class guarded_include(object):
 					shlex.split(
 							cpp_commands['strip_comments'].format(file=self.filename)
 							),
-					stderr=subprocess.STDOUT
+					stderr=subprocess.STDOUT,
+					encoding="utf8"
 					)
 			lineend = self._stripped.find('\n')
 			match_ifndef = patterns['ifndef'].search(self._stripped[:lineend])
@@ -58,11 +59,12 @@ class guarded_include(object):
 					shlex.split(
 							cpp_commands['test_if_guarded'].format(file=self.filename, define=define)
 							),
-					stderr=subprocess.STDOUT
+					stderr=subprocess.STDOUT,
+					encoding="utf8"
 					)
 			if not len(with_define) < 2:
 				return False
-			fh = open(self.filename, 'r')
+			fh = open(self.filename, 'r', encoding="utf8")
 			line = fh.readline()
 			while not patterns['ifndef'].search(line):
 				line = fh.readline()
@@ -78,11 +80,11 @@ class guarded_include(object):
 			return False
 
 	def convert(self):
-		freadh = open(self.filename, 'r')
+		freadh = open(self.filename, 'r', encoding="utf8")
 		lines = freadh.readlines()
 		sep = '\r\n' if lines[0].endswith('\r\n') else '\n'
 		freadh.close()
-		fwriteh = open(self.filename , 'w')
+		fwriteh = open(self.filename , 'w', encoding="utf8")
 		for l_number in range(1,len(lines)):
 			line = lines[-l_number]
 			if patterns['blank'].search(line):
