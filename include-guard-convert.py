@@ -11,6 +11,9 @@ import re
 import os
 import subprocess
 import shlex 
+import io
+import chardet
+import codecs
 
 regexes = {
 		'ifndef' : '^\s*#(?:ifndef|IFNDEF)\s+([A-Za-z_0-9]{4,})\s*$',
@@ -64,6 +67,8 @@ class guarded_include(object):
 				return False
 			fh = open(self.filename, 'r')
 			line = fh.readline()
+			if line.startswith(codecs.BOM_UTF8):
+				line = line.decode('utf-8-sig')
 			while not patterns['ifndef'].search(line):
 				line = fh.readline()
 				if not len(line):
@@ -94,7 +99,11 @@ class guarded_include(object):
 				raise SyntaxError('encountered meaningful line after last #endif: \n'+line)
 		define = None
 		done = False
+		addBom = False
 		for l_number,line in enumerate(lines):
+			if line.startswith(codecs.BOM_UTF8):
+				line = line.decode('utf-8-sig')
+				addBom = True
 			if done:
 				fwriteh.write(line)
 				continue
@@ -108,6 +117,8 @@ class guarded_include(object):
 				if define is None:
 					define = newdefine
 				elif define == newdefine:
+					if addBom is True:
+						fwriteh.write(codecs.BOM_UTF8)
 					fwriteh.write('#pragma once' + sep)
 					done = True
 			else:
