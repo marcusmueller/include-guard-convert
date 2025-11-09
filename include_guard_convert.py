@@ -3,6 +3,8 @@
 # Copyright: 2025 Marcus Müller
 """Tool to convert traditional include guards to #pragma once."""
 
+__all__ = ["guarded_include", "main"]
+
 import re
 import os
 import subprocess
