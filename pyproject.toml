@@ -1,6 +1,6 @@
 [project]
 name = "include-guard-convert"
-version = "1.0.0"
+version = "1.0.1"
 description = "Converts C/C++ preprocessor include guards from the `#ifndef XY_H`, `#define XY_H` to the `#pragma once` paradigm."
 license-files = ["COPYING"]
 readme = "README.md"

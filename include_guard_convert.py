@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# SPDX-license-identifier: EUPL-1.2
-# Copyright: 2025 Marcus Müller
+# SPDX-license-identifier: GPL-2.0-only
+# Copyright: 2025 Marcus Müller and contributors
 """Tool to convert traditional include guards to #pragma once."""
 
 __all__ = ["guarded_include", "main"]
