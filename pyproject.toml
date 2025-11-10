@@ -1,0 +1,12 @@
+[project]
+name = "include-guard-convert"
+version = "1.0.0"
+description = "Converts C/C++ preprocessor include guards from the `#ifndef XY_H`, `#define XY_H` to the `#pragma once` paradigm."
+license-files = ["COPYING"]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+[project.urls]
+Homepage = "https://github.com/marcusmueller/include-guard-convert"
+[project.scripts]
+include-guard-convert = "include_guard_convert:main"
